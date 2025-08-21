@@ -12,4 +12,22 @@ export class TvController {
         const pageNumber = page? Number(page) : 1
         return this.tvService.getPopular(pageNumber)
     }
+
+    @Get('top_rated')
+    getTopRated(@Query('page') page:string): Promise<TvDTO[]>{
+       const pageNumber = page? Number(page) : 1
+        return this.tvService.getTopRated(pageNumber)
+    }
+
+    @Get('airing_today')
+    getAiring(@Query('page') page:string): Promise<TvDTO[]> {
+        const pageNumber = page? Number(page) : 1
+        return this.tvService.getAiring(pageNumber)
+    }
+
+    @Get('on_the_air')
+    getOnTheAir(@Query('page') page:string): Promise<TvDTO[]>{
+        const pageNumber = page? Number(page) : 1
+        return this.tvService.getOnTheAir(pageNumber)
+    }
 }

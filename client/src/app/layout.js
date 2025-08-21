@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono,Bebas_Neue  } from "next/font/google";
 import "./globals.css";
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import Navbar from "./components/Navbar";
+
 
 
 const bebas = Bebas_Neue({
@@ -30,26 +31,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${bebas.variable} antialiased`}
       >
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center justify-evenly w-2/5"> 
-            <h2 className="font-bebas font-bold text-red-700 text-5xl">Netflix</h2>
-            <button className="font-medium">Home</button>
-            <button className="font-medium">TV Show</button>
-            <button className="font-medium">Movies</button>
-            <button className="font-medium">New & Popular</button>
-            <button className="font-medium">Browse by languages</button>
-          </div>
-          <div className="w-1/5 flex flex-row items-center justify-end">
-            <MagnifyingGlassIcon className="h-5 w-5 mr-1" />
-            <input
-              className="bg-gray-800 h-5 w-30 mr-8 rounded-sm text-xs pl-2"
-              placeholder="search..."
-            />
-            <div className="bg-white text-red-700 h-10 w-10 flex items-center justify-center rounded-full font-bold  mr-2">N</div>
-            <span className="font-medium  mr-8">NextZy</span>
-          </div>
-        </div>
-        
+        <Navbar/>
         {children}
       </body>
     </html>

@@ -4,6 +4,7 @@ import { TvService } from './tv.service';
 
 @Module({
   controllers: [TvController],
-  providers: [TvService]
+  providers: [TvService],
+  exports: [TvService]
 })
 export class TvModule {}

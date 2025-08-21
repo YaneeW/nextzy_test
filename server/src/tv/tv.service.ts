@@ -7,10 +7,21 @@ export class TvService {
 
     private readonly api_key = process.env.API_KEY
     private readonly tmdb_url = process.env.TMDB_URL
-    private popularTv = []
 
     async getPopular(page: number): Promise<TvDTO[]> {
         return await this.fetchData('popular',page)
+    }
+
+    async getTopRated(page:number) : Promise<TvDTO[]> {
+        return await this.fetchData('top_rated',page)
+    }
+
+    async getAiring(page:number) : Promise<TvDTO[]>{
+        return await this.fetchData('airing_today',page)
+    }
+
+    async getOnTheAir(page:number) : Promise<TvDTO[]> {
+        return await this.fetchData('on_the_air',page)
     }
 
     private async fetchData(category: string,page: number): Promise<TvDTO[]>{
