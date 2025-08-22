@@ -1,10 +1,26 @@
 "use client"
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 export default function Navbar(){
+    const router = useRouter()
+    const categories = [
+        {id:0, name:'Home', value: null},
+        {id:1, name: 'TV Show', value: 'tv'},
+        {id:2, name: 'Movies', value: 'movies'},
+        {id:3, name: 'New & Popular', value: 'trending'},
+        {id:4, name: 'Browse by language', value: 'discover'},
+    ]
     const [isOpen,setIsOpen] = useState(false)
 
+  function handleClickCategory (category){
+    if(category){
+        router.push(`/?category=${category}`)
+    }else{
+        router.push(`/`)
+    }
+  }
 
     return (
         <div>
@@ -14,11 +30,16 @@ export default function Navbar(){
                     {/* menu for destop */}
                     <div className="hidden md:flex flex-row items-center justify-evenly">
                         <h2 className="font-bebas font-bold text-red-700 text-5xl">Netflix</h2>
-                        <button className="font-medium">Home</button>
+                        { categories.map((c)=>(
+                            <button key={c.id} onClick={()=> handleClickCategory(c.value)} className="font-medium">
+                                {c.name}
+                            </button>
+                        ))}
+                        {/* <button className="font-medium">Home</button>
                         <button className="font-medium">TV Show</button>
                         <button className="font-medium">Movies</button>
                         <button className="font-medium">New & Popular</button>
-                        <button className="font-medium">Browse by languages</button>
+                        <button className="font-medium">Browse by languages</button> */}
                     </div>
 
                     {/* menu for mobile */}
