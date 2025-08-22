@@ -22,12 +22,12 @@ export default function Homepage() {
     const [activeItem,setActiveItem] = useState(0)
   const containerRef = useRef(null) // เพื่อเช็ค container ว่ามี element เรียบร้อยแล้ว
 
-  // const swrData = sectionData.map(section=>{
-  //   const {data,error,isLoading} = useSWR(apiUrl + category + '/' + section.value, fetcher)
-  //   // console.log("data",data)
-  //   return {...section, data: data || [], loading: isLoading, error}
-  // })
-
+  const swrData = sectionData.map(section=>{
+    const {data,error,isLoading} = useSWR(apiUrl + category + '/' + section.value, fetcher)
+    // console.log("data",data)
+    return {...section, data: data || [], loading: isLoading, error}
+  })
+console.log("swr",swrData)
 
 
   useEffect(()=>{
@@ -86,30 +86,64 @@ export default function Homepage() {
 
   if(section.length === 0) return <div>Loading</div>
 
-
+console.log("active",activeItem)
 
   return (
-    <div ref={containerRef}>
-       <Navbar/>
+    <div ref={containerRef} className="relative">
+       <Navbar />
       {/* active Item  */}
-      <div>
+      <div className="h-screen relative w-full">
         { activeSection?.data.results[activeItem] && (
             <div>
               <img
                 src={`${baseImageUrl}${activeSection?.data.results[activeItem].backdrop_path}`}
                 alt={activeSection?.data.results[activeItem].title}
+                className="w-full h-full opacity-60"
               />
-              <div>
-                <h1>{activeSection?.data.results[activeItem].title}</h1>
-                <p></p>
+              <div className="absolute top-100 left-20">
+                <div className="flex items-center">
+                    <span className="text-9xl font-bebas font-bold text-red-700 mr-2 ">N</span>
+                    <span className="text-3xl font-medium">S E R I E S</span>
+                </div>
+                <h1 className="text-8xl font-bold overflow-wrap w-2/5 indent-14 mb-5">
+                  {activeSection?.data.results[activeItem].title}
+                </h1>
+                <div className="font-bold flex items-end mb-5">
+                  <div className="text-xs text-black bg-red-700 w-10 h-10 text-center rounded-md">TOP <span className="text-lg">20</span></div>
+                  <div className="text-3xl ml-2">#{activeItem + 1} in {activeSection.name} Today</div>
+                </div>
+                <p className="overflow-wrap w-2/5 font-medium text-xl">
+                  {activeSection?.data.results[activeItem].overview}
+                </p>
                 <div>
-                  <button></button>
-                  <button></button>
+                  <button> ► Play </button>
+                  <button> ❕ More Info </button>
                 </div>
               </div>
             </div>
           )
         }
+      </div>
+
+      {/* section */}
+      <div>
+        <div className="flex space-x-4 overflow-x-auto px-10 scrollbar-hide">
+          {activeSection?.data.results.map((item,idx)=>(
+            <div 
+              key={idx}
+              className={`flex-shrink-0 w-40 cursor-pointer ${
+                idx === activeItem ? 'scale-110 transition-tranform duration-300 border-2 border-solid border-white'  : ''
+              }` }
+              onClick={()=> setActiveItem(idx)}
+            >
+              <span className="text-3xl font-bebas font-bold text-red-700">N</span>
+              <img
+                src={`${baseImageUrl}${item.poster_path}`}
+                alt={item.title}/>
+            </div>
+            
+          ))}
+        </div>
       </div>
     </div>
   );

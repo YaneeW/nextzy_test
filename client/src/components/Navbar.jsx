@@ -23,9 +23,9 @@ export default function Navbar(){
   }
 
     return (
-        <div>
+        <div className="absolute top-3 left-0 w-full z-50 bg-transparent">
             <div className="flex flex-row items-center justify-between">
-                <div className="w-2/4 bg-blue-500"> 
+                <div className="w-2/5"> 
                   
                     {/* menu for destop */}
                     <div className="hidden md:flex flex-row items-center justify-evenly">
