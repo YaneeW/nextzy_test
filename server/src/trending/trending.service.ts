@@ -17,7 +17,17 @@ export class TrendingService {
     }
 
     async getPeople(){
-        return await this.fetchData('person')
+        const response = await this.fetchData('person')
+        const newResponse = response.results.map((item: any)=>{
+            console.log("item",item)
+            item['backdrop_path'] = item.profile_path || null
+            item['poster_path'] = item.profile_path  || null
+            item['title'] = item.name
+            item['overview'] = item.known_for_department
+             return item
+            }
+        )
+        return {...response,results:newResponse}
     }
 
     async getTv(){

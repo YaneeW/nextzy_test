@@ -30,7 +30,7 @@ export default function Navbar(){
                 <div className="hidden md:flex flex-row items-center justify-evenly w-3/5">
                     <h2 className="font-bebas font-bold text-red-700 text-base md:text-2xl lg:text-5xl 2xl:text-6xl">Netflix</h2>
                     { categories.map((c)=>(
-                        <button key={c.id} onClick={()=> handleClickCategory(c.value)} className="md:font-medium text-base md:text-[10px] lg:text-lg 2xl:text-xl hover:scale-110 hover:duration-500 hover:transition-transfrom">
+                        <button key={c.id} onClick={()=> handleClickCategory(c.value)} className="md:font-medium text-base md:text-[10px] lg:text-lg 2xl:text-xl hover:scale-110 hover:duration-500 hover:transition-transfrom cursor-pointer">
                             {c.name}
                         </button>
                     ))}
@@ -62,10 +62,10 @@ export default function Navbar(){
                     </div>
                 </div>
                 <div className="md:hidden flex item-center justify-center w-full font-bold">
-                    <button className=" text-md m-4">Home</button>
+                    <button className=" text-md m-4 cursor-pointer">Home</button>
                     <div className="relative inline-block">
                         <button
-                            className="m-4 px-4 py-2 rounded "
+                            className="m-4 px-4 py-2 rounded cursor-pointer"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             Categories ▾

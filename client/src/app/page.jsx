@@ -151,12 +151,12 @@ export default function Homepage() {
       </div>
 
        {/* section */}
-      <div className="absolute top-170 md:top-160 xl:top-130 w-full px-10 2xl:top-230 ">
+      <div className="absolute top-190 md:top-160 xl:top-130 w-full px-10 2xl:top-230 ">
         <div className="flex flex-col">
             { section.map((sec,idx)=>(
-              <div key={idx} className="mb-5 pt-15">
+              <div key={idx} className="mb-5 pt-6 xl:pt-15">
                 <div className="font-bold text-xs md:text-xl">{sec.name} on Netflix</div>
-                <div className="flex space-x-4 overflow-x-auto px-6 scrollbar-hide pt-8">
+                <div className="flex space-x-4 overflow-x-auto px-2 xl:px-6 scrollbar-hide pt-8">
                   { sec.data.results.map((item,id)=>(
                       <div 
                         key={id}
@@ -166,7 +166,7 @@ export default function Homepage() {
                             el.scrollIntoView({ behavior: "smooth", inline: "end", block: "end" });
                           }
                         }}
-                        className={`relative flex-shrink-0 w-20 md:w-40 cursor-pointer rounded-md md:rounded-lg ${
+                        className={`relative flex-shrink-0 w-30 md:w-40 cursor-pointer rounded-md md:rounded-lg ${
                         idx === currentSection  && id === activeItem ? 'scale-110 transition-transfrom -translate-y-2 duration-500 border-2 border-solid border-white z-20'  
                           : 'z-0'
                         }` }
