@@ -89,35 +89,35 @@ console.log("swr",swrData)
 console.log("active",activeItem)
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="h-full relative w-full">
        <Navbar />
       {/* active Item  */}
-      <div className="h-screen relative w-full">
+      <div className="">
         { activeSection?.data.results[activeItem] && (
             <div>
               <img
                 src={`${baseImageUrl}${activeSection?.data.results[activeItem].backdrop_path}`}
                 alt={activeSection?.data.results[activeItem].title}
-                className="w-full h-full opacity-60"
+                className="w-screen h-screen opacity-60 object-cover"
               />
-              <div className="absolute top-100 left-20">
+              <div className="absolute top-50 left-20">
                 <div className="flex items-center">
-                    <span className="text-9xl font-bebas font-bold text-red-700 mr-2 ">N</span>
-                    <span className="text-3xl font-medium">S E R I E S</span>
+                    <span className="text-7xl font-bebas font-bold text-red-700 mr-2 ">N</span>
+                    <span className="text-2xl font-medium">S E R I E S</span>
                 </div>
-                <h1 className="text-8xl font-bold overflow-wrap w-2/5 indent-14 mb-5">
+                <h1 className="text-7xl font-bold overflow-wrap w-2/5 indent-14 mb-5">
                   {activeSection?.data.results[activeItem].title}
                 </h1>
                 <div className="font-bold flex items-end mb-5">
-                  <div className="text-xs text-black bg-red-700 w-10 h-10 text-center rounded-md">TOP <span className="text-lg">20</span></div>
-                  <div className="text-3xl ml-2">#{activeItem + 1} in {activeSection.name} Today</div>
+                  <div className="text-[8px] text-black bg-red-700 w-7 h-7 text-center rounded-md">TOP <span className="text-sm">20</span></div>
+                  <div className="text-xl ml-2">#{activeItem + 1} in {activeSection.name} Today</div>
                 </div>
-                <p className="overflow-wrap w-2/5 font-medium text-xl">
+                <p className="overflow-wrap w-2/5 font-medium text-xl mb-5">
                   {activeSection?.data.results[activeItem].overview}
                 </p>
                 <div>
-                  <button> ► Play </button>
-                  <button> ❕ More Info </button>
+                  <button className="text-black font-bold bg-white px-6 py-2 rounded-sm text-2xl hover:scale-105 transition-tranform duration-300"> ► Play </button>
+                  <button className="font-bold bg-gray-600/75 px-8 py-3 rounded-sm text-xl ml-2 hover:scale-105 transition-tranform duration-300"> ❕ More Info </button>
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ console.log("active",activeItem)
       </div>
 
       {/* section */}
-      <div>
+      <div className="absolute">
         <div className="flex space-x-4 overflow-x-auto px-10 scrollbar-hide">
           {activeSection?.data.results.map((item,idx)=>(
             <div 
