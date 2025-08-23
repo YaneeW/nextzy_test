@@ -15,6 +15,7 @@ export default function Navbar(){
     const [isOpen,setIsOpen] = useState(false)
 
   function handleClickCategory (category){
+    console.log("cat",category)
     if(category){
         router.push(`/?category=${category}`)
     }else{
@@ -29,7 +30,7 @@ export default function Navbar(){
                 <div className="hidden md:flex flex-row items-center justify-evenly w-3/5">
                     <h2 className="font-bebas font-bold text-red-700 text-base md:text-2xl lg:text-5xl 2xl:text-6xl">Netflix</h2>
                     { categories.map((c)=>(
-                        <button key={c.id} onClick={()=> handleClickCategory(c.value)} className="md:font-medium text-base md:text-[10px] lg:text-lg 2xl:text-xl">
+                        <button key={c.id} onClick={()=> handleClickCategory(c.value)} className="md:font-medium text-base md:text-[10px] lg:text-lg 2xl:text-xl hover:scale-110 hover:duration-500 hover:transition-transfrom">
                             {c.name}
                         </button>
                     ))}
@@ -60,8 +61,8 @@ export default function Navbar(){
                         <div className="bg-white text-red-700 h-6 w-6 text-sm flex items-center justify-center rounded-full font-bold mr-4">N</div>
                     </div>
                 </div>
-                <div className="md:hidden flex item-center justify-center w-full font-medium">
-                    <button className=" text-sm m-4">Home</button>
+                <div className="md:hidden flex item-center justify-center w-full font-bold">
+                    <button className=" text-md m-4">Home</button>
                     <div className="relative inline-block">
                         <button
                             className="m-4 px-4 py-2 rounded "

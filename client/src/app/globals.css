@@ -23,8 +23,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family:var(--font-geist-sans);
+  overflow-y: auto;
 }
 
 .font-bebas {
   font-family: var(--font-bebas);
+}
+
+/* สำหรับ Chrome, Safari */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* สำหรับ Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
 }
