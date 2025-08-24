@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TrendingDTO } from './dto/trending.dto';
 import axios from 'axios'
+import { CustomException } from 'src/common/exceptions/custom-exception';
 
 @Injectable()
 export class TrendingService {
@@ -9,17 +10,27 @@ export class TrendingService {
     private readonly tmdb_url = process.env.TMDB_URL
 
     async getAll(){
-        return await this.fetchData('all')
+        const trendingList = await this.fetchData('all')
+        if(!trendingList){
+            throw new CustomException('Trending list not found',404)
+        }
+        return trendingList
     }
 
     async getMovies(){
-        return await this.fetchData('movie')
+        const moviesList = await this.fetchData('movie')
+        if(!moviesList){
+            throw new CustomException('Trending movies list not found',404)
+        }
+        return moviesList
     }
 
     async getPeople(){
         const response = await this.fetchData('person')
+        if(!response){
+            throw new CustomException('Trending people list not found',404)
+        }
         const newResponse = response.results.map((item: any)=>{
-            console.log("item",item)
             item['backdrop_path'] = item.profile_path || null
             item['poster_path'] = item.profile_path  || null
             item['title'] = item.name
@@ -31,7 +42,11 @@ export class TrendingService {
     }
 
     async getTv(){
-        return await this.fetchData('tv')
+        const tvList =  await this.fetchData('tv')
+        if(!tvList){
+            throw new CustomException('Trending tv list not found',404)
+        }
+        return tvList
     }
 
     private async fetchData(category: string){
