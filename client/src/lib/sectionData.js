@@ -1,6 +1,6 @@
 export const categorySections = {
     home: [
-        { name: 'Popular Movies', value: 'movies_popular'},
+        { name: 'Popular Movies', value: 'movies_popular',},
         { name: 'Popular TV', value: 'tv_popular'},
         { name: 'Trending Movies', value: 'movies_trending'},
         { name: 'Trending TV', value: 'tv_trending'}

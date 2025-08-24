@@ -1,7 +1,7 @@
 'use client'
 import { Geist, Geist_Mono,Bebas_Neue  } from "next/font/google";
 import "./globals.css";
-
+import { MylistProvider } from "./context/MylistContext";
 
 const bebas = Bebas_Neue({
     subsets: ['latin'],
@@ -31,7 +31,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${bebas.variable} antialiased`}
       >
         <main className="w-full h-full">
-          {children}
+          <MylistProvider>
+            {children}
+          </MylistProvider>
         </main>
       </body>
     </html>

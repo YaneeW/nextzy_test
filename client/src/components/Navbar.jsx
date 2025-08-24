@@ -10,16 +10,25 @@ export default function Navbar(){
         {id:1, name: 'TV Show', value: 'tv'},
         {id:2, name: 'Movies', value: 'movies'},
         {id:3, name: 'New & Popular', value: 'trending'},
-        {id:4, name: 'Browse by language', value: 'discover'},
+        {id:4, name: 'Mylist', value: 'mylist'},
     ]
     const [isOpen,setIsOpen] = useState(false)
+    const [keyword,setKeyword] = useState("")
 
   function handleClickCategory (category){
-    console.log("cat",category)
-    if(category){
+    if(category === 'mylist'){
+        router.push(`/mylist`)
+    }
+    else if(category){
         router.push(`/?category=${category}`)
-    }else{
+    }
+    else{
         router.push(`/`)
+    }
+  }
+  function handleSearch () {
+    if(keyword.trim()){
+        router.push(`/search?q=${keyword}`)
     }
   }
 
@@ -37,11 +46,13 @@ export default function Navbar(){
                 </div>
 
                 <div className="hidden w-1/5 md:flex flex-row items-center justify-end mr-2">
-                    <MagnifyingGlassIcon className="min-h-3 min-w-3 w-5 h-5 mr-1" />
+                    
                     <input
-                    className="bg-gray-800 h-3 w-20 mr-4 rounded-sm text-[10px] pl-2 lg:h-5 lg:w-30 lg:text-xs lg:mr-8"
-                    placeholder="search..."
+                        className="bg-gray-800 h-3 w-20 rounded-sm text-[10px] pl-2 lg:h-5 lg:w-30 lg:text-xs mr-2"
+                        placeholder="search..."
+                        onChange={(e)=> setKeyword(e.target.value)}
                     />
+                    <MagnifyingGlassIcon className="min-h-3 min-w-3 w-5 h-5 mr-4 lg:mr-8 cursor-pointer" onClick={handleSearch}/>
                     <div className="bg-white text-red-700 h-8 w-10 text-xl flex items-center justify-center rounded-full font-bold  mr-2 lg:h-10 lg:text-2xl">N</div>
                     <span className="hidden md:font-medium 2xl:inline lg:mr-8 lg:text-sm" >NextZy</span>
                 </div>
@@ -53,11 +64,13 @@ export default function Navbar(){
                 <div className="md:hidden flex items-center justify-between">
                     <h2 className="font-bebas font-bold text-red-700 text-6xl ml-4">N</h2>
                     <div className=" w-2/5 flex flex-row items-center justify-end">
-                        <MagnifyingGlassIcon className="h-2 w-2 mr-1" />
+                        
                         <input
-                        className="bg-gray-800 h-3 w-20 mr-2 rounded-sm text-[6px] pl-2"
-                        placeholder="search..."
+                            className="bg-gray-800 h-3 w-20 mr-2 rounded-sm text-[6px] pl-2"
+                            placeholder="search..."
+                            onChange={(e)=> setKeyword(e.target.value)}
                         />
+                        <MagnifyingGlassIcon className="h-2 w-2 mr-2 cursor-pointer" onClick={handleSearch}/>
                         <div className="bg-white text-red-700 h-6 w-6 text-sm flex items-center justify-center rounded-full font-bold mr-4">N</div>
                     </div>
                 </div>
