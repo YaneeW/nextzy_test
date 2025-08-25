@@ -5,7 +5,7 @@ import { categorySections } from '@/lib/sectionData'
 import Navbar from "../components/Navbar";
 import {apiRequest} from '../lib/apiClientHandle'
 import { MylistContext } from './context/MylistContext';
-import Image from "next/image";
+
 
 
 
@@ -216,7 +216,20 @@ export default function Homepage() {
                         <div className=" text-md ml-2">#{activeItem + 1} in {activeSection.name} Today</div>
                     </div>
                     <div>
-                    <button className="text-black font-bold bg-white px-4 py-1 rounded-sm text-xl hover:scale-105 transition-tranform duration-300"> ► Play </button>
+                      <button className="text-black font-bold bg-white px-4 py-1 rounded-sm text-xl hover:scale-105 transition-tranform duration-300"> ► Play </button>
+                      { isInMylist ? (
+                          <button 
+                            onClick={()=>handleRemoveMylist(activeSection?.data.results[activeItem])}
+                            className="font-bold bg-gray-600/75 px-4 py-1 rounded-sm text-xl hover:scale-105 transition-tranform duration-300"> 
+                            ✓ In MyList
+                          </button>
+                        ): (
+                          <button 
+                            onClick={()=>handleAddMylist(activeSection?.data.results[activeItem])}
+                            className="font-bold bg-gray-600/75 px-4 py-1 rounded-sm text-xl hover:scale-105 transition-tranform duration-300"> 
+                            + Add Mylist 
+                          </button>
+                        )}
                     </div>
                 </div>
                 </div>
