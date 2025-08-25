@@ -5,6 +5,8 @@ import { categorySections } from '@/lib/sectionData'
 import Navbar from "../components/Navbar";
 import {apiRequest} from '../lib/apiClientHandle'
 import { MylistContext } from './context/MylistContext';
+import Image from "next/image";
+
 
 
 export default function Homepage() {
@@ -18,6 +20,7 @@ export default function Homepage() {
   const [section,setSection] = useState([]) 
   const [currentSection,setCurrentSection] = useState(0)
   const [activeItem,setActiveItem] = useState(0)
+  const [loading,setLoading] = useState(true)
   // const [mylist,setMylist] = useState([])
   const {mylist,addToMylist,removeToMylist} = useContext(MylistContext)
 
@@ -28,6 +31,9 @@ export default function Homepage() {
 
     // fetch ข้อมุลทีละ section
   useEffect(()=>{
+
+    setLoading(true)
+
     const fetchSection = async () => {
       const result = []
 
@@ -67,10 +73,14 @@ export default function Homepage() {
             isLoading: false, 
             error:true,
             errorMaessage:error})
+        }finally{
+          setLoading(false)
         }
       }
       setSection(result)
     }
+
+    
     fetchSection()
     setActiveItem(0)
   },[category,apiUrl,sectionData])
@@ -114,7 +124,7 @@ export default function Homepage() {
     removeToMylist(list)
   }
 
-  if(section.length === 0) 
+  if(loading || section.length === 0) 
     return (
       <div className="flex items-center justify-center w-full h-full mt-100">
         <div className="lg:border-12 lg:h-30 lg:w-30 border-6 h-15 w-15 border-dotted border-red-700 animate-spin  relative rounded-full"> </div>
@@ -137,7 +147,7 @@ export default function Homepage() {
                     <img
                     src={`${baseImageUrl}original${activeSection?.data.results[activeItem].backdrop_path}`}
                     alt={activeSection?.data.results[activeItem].title}
-                    className="w-screen h-screen  object-cover mask-b-from-70% mask-b-to-80% mask-t-from-70%"
+                    className="w-screen h-screen  object-cover mask-b-from-70% mask-b-to-80% mask-t-from-70% transition-opacity duration-700 "
                     />
                 ) : (
                     <div className="flex h-full items-center justify-center text-sm">Not found the picture</div>
@@ -187,7 +197,8 @@ export default function Homepage() {
                     <img
                     src={`${baseImageUrl}original${activeSection?.data.results[activeItem].poster_path}`}
                     alt={activeSection?.data.results[activeItem].title}
-                    className="w-screen h-screen  object-fill mask-b-from-70% mask-b-to-80% mask-t-from-70%"
+                    className="w-screen h-screen  object-fill mask-b-from-70% mask-b-to-80% mask-t-from-70% transition-opacity duration-700 "
+                   
                     />
                 ) :(
                     <div className="flex h-full items-center justify-center text-sm">Not found the picture</div>
@@ -241,7 +252,7 @@ export default function Homepage() {
                                 <span className="absolute top-2 left-2 text-3xl font-bebas font-bold text-red-700">N</span>
                                 { item.poster_path ? (
                                 <img
-                                  className="rounded-lg"
+                                  className="rounded-lg transition-opacity duration-700"
                                   src={`${baseImageUrl}original${item.poster_path}`}
                                   alt={item.title}/>
                                 ) : (
