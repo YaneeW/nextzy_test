@@ -22,11 +22,11 @@ export default function MoviesList({title,list}){
   }
 
     return (
-        <div className="absolute top-40 ml-30">
-            <h1 className="text-2xl font-medium mb-10">{title}</h1>
-            <div className="flex flex-wrap gap-4">
+        <div className="absolute top-45 ml-10 md:top-30 md:ml-20 xl:top-40 xl:ml-30">
+            <h1 className=" md:text-xl xl:text-2xl font-medium mb-10">{title}</h1>
+            <div className="flex flex-wrap gap-2 md:gap-3 xl:gap-4">
                 {listWithCheckMyList.map((li,idx)=>(
-                    <div key={idx} className="bg-gray-800 relative group cursor-pointer w-80 h-45 ">
+                    <div key={idx} className="bg-gray-800 relative group cursor-pointer w-40 h-22 md:w-50 md:h-28  xl:w-80 xl:h-45 ">
                         { li.backdrop_path ? (
                             <div>
                                  <img
